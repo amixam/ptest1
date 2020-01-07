@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+from sys import argv
+
+
+def main():
+    prefix = argv[1]
+    ip = list(prefix.split('/')[0].split('.'))
+    mask = prefix.split('/')[1]
+    ipbin = f"{int(ip[0]):0>8b}{int(ip[1]):0>8b}{int(ip[2]):0>8b}{int(ip[3]):0>8b}"
+    netbin = f"{ipbin[0:int(mask)]:0<32}"
+    net1 = netbin[0:8]
+    net2 = netbin[8:16]
+    net3 = netbin[16:24]
+    net4 = netbin[24:32]
+    maskbin = f"{'1' * int(mask):0<32}"
+    mask1 = maskbin[0:8]
+    mask2 = maskbin[8:16]
+    mask3 = maskbin[16:24]
+    mask4 = maskbin[24:32]
+    print('\n' + '-' * 30)
+    print('IP:')
+    print(f"{ip[0]:<10}{ip[1]:<10}{ip[2]:<10}{ip[3]:<10}")
+    print('\n')
+    print('Network:')
+    print(f"{int(net1, 2):<10}{int(net2, 2):<10}{int(net3, 2):<10}{int(net4, 2):<10}")
+    print(f"{net1:<10}{net2:<10}{net3:<10}{net4:<10}")
+    print('\n')
+    print('Mask:\n/' + mask)
+    print(f"{int(mask1,2):<10}{int(mask2,2):<10}{int(mask3,2):<10}{int(mask4,2):<10}")
+    print(f"{mask1:<10}{mask2:<10}{mask3:<10}{mask4:<10}")
+
+
+if __name__ == '__main__':
+    main()
